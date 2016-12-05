@@ -27,7 +27,7 @@
 `tar zxf setuptools-30.0.0.tar.gz`  
 安装setuptools  
 `cd setuptools-30.0.0`  
-`python setup.py build`
+`python setup.py build`  
 `python setup.py install`
 这样setuptools就安装成功了。
 再进入到MySQL-python-1.2.5目录，重新执行build、install等操作。
