@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -54,7 +53,7 @@ ROOT_URLCONF = 'tlforum.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'tlforum/templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,3 +121,56 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+LOG_DIR = '/tmp/'
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s:%(lineno)s %(funcName)s %(message)s'
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+         }
+     },
+    'handlers': {
+        'default': {
+            'level':'WARN',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'tlforum_warning.log'),
+            'maxBytes': 1024*1024*10, # 10 MB
+            'formatter':'standard',
+        },
+        'request_handler': {
+                'level':'WARN',
+                'class':'logging.handlers.RotatingFileHandler',
+                'filename': os.path.join(LOG_DIR, 'tlforum_error.log'),
+                'maxBytes': 1024*1024*10, # 10 MB
+                'formatter':'standard',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        '': {
+            'handlers': ['default'],
+            'level': 'WARN',
+            'propagate': True
+        },
+        'django.request': {
+            'handlers': ['request_handler', 'mail_admins'],
+            'level': 'WARN',
+            'propagate': False
+        },
+    }
+}

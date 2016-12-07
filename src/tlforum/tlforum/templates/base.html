@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>{% block title %}tlforum-开源社区{% endblock %}</title>
+
+    <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/tlforum.css?t=20130807001.css" />
+</head>
+
+<body>
+    <div id="header">
+        This is header
+    </div>
+
+    <div id="wrapper-body">
+        This is body
+    </div>
+
+    {% include 'footer.html' %}
+
+    <script type="text/javascript">
+    </script>
+    {% block extra_script%}{% endblock %}
+</body>
+</html>
