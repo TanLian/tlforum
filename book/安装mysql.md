@@ -3,7 +3,7 @@
 * 设置mysql开机自启动  
 `chkconfig mysqld on`
 * 启动mysql数据库
-`/etc/init.d/mysql start`或者`service mysqld start`
+`/etc/init.d/mysqld start`或者`service mysqld start`
 * 修改root账号默认密码
 `mysqladmin -u root password '123456'`  
 我将root的默认密码设置成了123456，当然也可以设成其他值。
